@@ -77,6 +77,17 @@ fi
 chmod 666 /mnt/vendor/persist/regdb.bin
 chown system:wifi /mnt/vendor/persist/regdb.bin
 
+vendorRegdb=`md5sum /vendor/etc/wifi/regdb.bin |cut -d" " -f1`
+persistRegdb=`md5sum /mnt/vendor/persist/regdb.bin |cut -d" " -f1`
+if [ x"$vendorRegdb" != x"$persistRegdb" ]; then
+    cp /vendor/etc/wifi/regdb.bin /mnt/vendor/persist/regdb.bin
+    echo "$system_regBinversion" > /mnt/vendor/persist/regBin_version
+    sync
+    chmod 666 /mnt/vendor/persist/regdb.bin
+    chown system:wifi /mnt/vendor/persist/regdb.bin
+    echo "regdb check"
+fi
+
 if [ ! -s /mnt/vendor/persist/bdwlan.bin  -o $system_version -gt $persist_version ]; then
     prj_version=`cat /proc/oppoVersion/prjName`
     case $prj_version in
@@ -196,7 +207,73 @@ fi
 chmod 666 /mnt/vendor/persist/bdwlan.bin
 chown system:wifi /mnt/vendor/persist/bdwlan.bin
 
+if [ $system_version -eq $persist_version ] ; then
+    persistbdf=`md5sum /mnt/vendor/persist/bdwlan.bin |cut -d" " -f1`
+    case $prj_version in
+       "19125" | "19126" | "19127"| "19128")
+    vendorbdf=`md5sum /vendor/etc/wifi/bdwlan_19125.bin |cut -d" " -f1`
+    if [ x"$vendorbdf" != x"$persistbdf" ]; then
+        cp /vendor/etc/wifi/bdwlan_19125.bin /mnt/vendor/persist/bdwlan.bin
+        sync
+        echo "bdf check"
+    fi
+    ;;
+       "19101" | "19102")
+    vendorbdf=`md5sum /vendor/etc/wifi/bdwlan_19101.bin |cut -d" " -f1`
+    if [ x"$vendorbdf" != x"$persistbdf" ]; then
+        cp /vendor/etc/wifi/bdwlan_19101.bin /mnt/vendor/persist/bdwlan.bin
+        sync
+        echo "bdf check"
+    fi
+    ;;
+       "19501" )
+    vendorbdf=`md5sum /vendor/etc/wifi/bdwlan_19501.bin |cut -d" " -f1`
+    if [ x"$vendorbdf" != x"$persistbdf" ]; then
+        cp /vendor/etc/wifi/bdwlan_19501.bin /mnt/vendor/persist/bdwlan.bin
+        sync
+        echo "bdf check"
+    fi
+    ;;
+       "19521" )
+    vendorbdf=`md5sum /vendor/etc/wifi/bdwlan_19521.bin |cut -d" " -f1`
+    if [ x"$vendorbdf" != x"$persistbdf" ]; then
+        cp /vendor/etc/wifi/bdwlan_19521.bin /mnt/vendor/persist/bdwlan.bin
+        sync
+        echo "bdf check"
+    fi
+    ;;
+       "19335" )
+    vendorbdf=`md5sum /vendor/etc/wifi/bdwlan_19335.bin |cut -d" " -f1`
+    if [ x"$vendorbdf" != x"$persistbdf" ]; then
+        cp /vendor/etc/wifi/bdwlan_19335.bin /mnt/vendor/persist/bdwlan.bin
+        sync
+        echo "bdf check"
+    fi
+    ;;
+    esac
+fi
 
+if [ $system_version -eq $persist_version ] ; then
+    persistbdf=`md5sum /mnt/vendor/persist/bdwlan.bin |cut -d" " -f1`
+    prj_version=`cat /proc/oppoVersion/prjName`
+    pcb_version=`cat /proc/oppoVersion/pcbVersion`
+    
+    case $prj_version in
+       "19751" | "19752" | "19753" | "19700")
+       vendorbdf=`md5sum /vendor/etc/wifi/bdwlan_19751.bin |cut -d" " -f1`
+    if [ x"$vendorbdf" != x"$persistbdf" ]; then
+        cp /vendor/etc/wifi/bdwlan_19751.bin /mnt/vendor/persist/bdwlan.bin
+        sync
+        echo "bdf check"
+     fi
+     ;;
+     esac
+fi
+
+
+
+chmod 666 /mnt/vendor/persist/bdwlan.bin
+chown system:wifi /mnt/vendor/persist/bdwlan.bin
 #Yuan.Huang@PSW.CN.Wifi.Network.internet.1065227, 2016/11/09,
 #Add for make WCNSS_qcom_cfg.ini Rom-update.
 if [ -s /vendor/etc/wifi/WCNSS_qcom_cfg.ini ]; then
@@ -226,8 +303,19 @@ fi
 if [ ! -s /mnt/vendor/persist/WCNSS_qcom_cfg.ini -o $system_version -gt $persist_version ]; then
     cp /vendor/etc/wifi/WCNSS_qcom_cfg.ini \
             /mnt/vendor/persist/WCNSS_qcom_cfg.ini
+    sync
     chown system:wifi /mnt/vendor/persist/WCNSS_qcom_cfg.ini
     chmod 666 /mnt/vendor/persist/WCNSS_qcom_cfg.ini
+fi
+
+persistini=`cat /mnt/vendor/persist/WCNSS_qcom_cfg.ini | grep -v "#" | grep -wc "END"`
+if [ x"$persistini" = x"0" ]; then
+    cp /vendor/etc/wifi/WCNSS_qcom_cfg.ini \
+            /mnt/vendor/persist/WCNSS_qcom_cfg.ini
+    sync
+    chown system:wifi /mnt/vendor/persist/WCNSS_qcom_cfg.ini
+    chmod 666 /mnt/vendor/persist/WCNSS_qcom_cfg.ini
+    echo "ini check"
 fi
 
 #else /* VENDOR_EDIT */

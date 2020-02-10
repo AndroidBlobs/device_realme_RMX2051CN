@@ -35,8 +35,9 @@
         <boolean name="config_oppo_lte_preferred_for_second_slot" value="true" />
     </carrier_config>
     <carrier_config operator="CU">
-        <string-array name="mccmnc" num="2">
+        <string-array name="mccmnc" num="3">
             <item value="46001" />
+            <item value="46006" />
             <item value="46009" />
         </string-array>
         <int name="volte_status" value="1" />

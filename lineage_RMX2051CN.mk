@@ -17,7 +17,7 @@ PRODUCT_MODEL := RMX2051
 PRODUCT_GMS_CLIENTID_BASE := android-realme
 TARGET_VENDOR := realme
 TARGET_VENDOR_PRODUCT_NAME := RMX2051CN
-PRODUCT_BUILD_PROP_OVERRIDES += PRIVATE_BUILD_DESC="qssi-user 10 QKQ1.191117.002 eng.root.20200108.001858 release-keys"
+PRODUCT_BUILD_PROP_OVERRIDES += PRIVATE_BUILD_DESC="qssi-user 10 QKQ1.191117.002 eng.root.20200120.112752 release-keys"
 
 # Set BUILD_FINGERPRINT variable to be picked up by both system and vendor build.prop
-BUILD_FINGERPRINT := qti/lito/lito:10/QKQ1.191117.002/root01080101:user/release-keys
+BUILD_FINGERPRINT := qti/lito/lito:10/QKQ1.191117.002/root01201204:user/release-keys
