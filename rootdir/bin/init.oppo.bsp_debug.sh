@@ -33,67 +33,47 @@
 enable_aging_ftrace()
 {
     echo 0 > /d/tracing/tracing_on
-    echo 100000 > /d/tracing/buffer_size_kb
+    echo 50000 > /d/tracing/buffer_size_kb
     echo "" > /d/tracing/set_event
     echo "" > /d/tracing/trace 
 
     echo 0 > /d/tracing/events/enable
-    #echo 1 > /d/tracing/events/sched/sched_blocked_reason/enable
-    #echo 1 > /d/tracing/events/sched/sched_enq_deq_task/enable
-    #echo 1 > /d/tracing/events/sched/sched_find_best_target/enable
+    echo 1 > /d/tracing/events/sched/sched_blocked_reason/enable
+    echo 1 > /d/tracing/events/sched/sched_enq_deq_task/enable
+    echo 1 > /d/tracing/events/sched/sched_find_best_target/enable
     echo 1 > /d/tracing/events/sched/sched_isolate/enable
-    #echo 1 > /d/tracing/events/sched/sched_migrate_task/enable
-    #echo 1 > /d/tracing/events/sched/sched_preempt_disable/enable
-    #echo 1 > /d/tracing/events/sched/sched_set_preferred_cluster/enable
-    #echo 1 > /d/tracing/events/sched/sched_stat_blocked/enable
-    #echo 1 > /d/tracing/events/sched/sched_stat_iowait/enable
+    echo 1 > /d/tracing/events/sched/sched_migrate_task/enable
+    echo 1 > /d/tracing/events/sched/sched_preempt_disable/enable
+    echo 1 > /d/tracing/events/sched/sched_set_preferred_cluster/enable
+    echo 1 > /d/tracing/events/sched/sched_stat_blocked/enable
+    echo 1 > /d/tracing/events/sched/sched_stat_iowait/enable
     echo 1 > /d/tracing/events/sched/sched_wakeup/enable
-    #echo 1 > /d/tracing/events/sched/sched_waking/enable
+    echo 1 > /d/tracing/events/sched/sched_waking/enable
 
-    #echo 1 > /d/tracing/events/sched/sched_task_util/enable
-    #echo 1 > /d/tracing/events/sched/sched_update_task_ravg_mini/enable
-    #echo 1 > /d/tracing/events/sched/sched_util_est_cpu/enable
-    #echo 1 > /d/tracing/events/sched/sched_util_est_task/enable
-    #echo 1 > /d/tracing/events/sched/sched_load_to_gov/enable
-    #echo 1 > /d/tracing/events/sched/sched_cpu_util/enable
-    #echo 1 > /d/tracing/events/power/sugov_next_freq/enable
-    #echo 1 > /d/tracing/events/power/sugov_util_update/enable
-#    echo 1 > /d/tracing/events/power/cpu_frequency/enable
-#    echo 1 > /d/tracing/events/power/cpu_frequency_limits/enable
+    echo 1 > /d/tracing/events/sched/sched_task_util/enable
+    echo 1 > /d/tracing/events/sched/sched_update_task_ravg_mini/enable
+    echo 1 > /d/tracing/events/sched/sched_util_est_cpu/enable
+    echo 1 > /d/tracing/events/sched/sched_util_est_task/enable
+    echo 1 > /d/tracing/events/sched/sched_load_to_gov/enable
+    echo 1 > /d/tracing/events/sched/sched_cpu_util/enable
+    echo 1 > /d/tracing/events/power/sugov_next_freq/enable
+    echo 1 > /d/tracing/events/power/sugov_util_update/enable
+    echo 1 > /d/tracing/events/power/cpu_frequency/enable
+    echo 1 > /d/tracing/events/power/cpu_frequency_limits/enable
 
 #debug the irq storm problem
-    #echo 1 > /d/tracing/events/irq/enable
-    #echo 1 > /d/tracing/events/irq/filter
+    echo 1 > /d/tracing/events/irq/enable
+    echo 1 > /d/tracing/events/irq/filter
     echo 1 > /d/tracing/events/irq/softirq_entry/enable
     echo 1 > /d/tracing/events/irq/softirq_exit/enable
-    #echo 1 > /d/tracing/events/irq/softirq_raise/enable
+    echo 1 > /d/tracing/events/irq/softirq_raise/enable
 
 #debug the io related problem
-    #echo 1 > /d/tracing/events/block/block_rq_issue
-    #echo 1 > /d/tracing/events/block/block_rq_complete
-    #echo 1 > /d/tracing/events/block/enable
-    #echo 1 > /d/tracing/events/ufs/enable
-    #echo 1 > /d/tracing/events/scsi/enable
-
-#debug f2fs related problem
-   # echo 1 > /d/tracing/events/f2fs/f2fs_destroy_extent_tree/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_drop_inode f2fs_evict_inode/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_fallocate/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_iget/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_iget_exit/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_map_blocks/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_new_inode/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_truncate/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_truncate_blocks_enter/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_truncate_blocks_exit/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_truncate_inode_blocks_enter/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_truncate_inode_blocks_exit/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_truncate_node/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_truncate_nodes_enter/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_truncate_nodes_exit/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_unlink_enter/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_unlink_exit/enable
-   # echo 1 > /d/tracing/events/f2fs/f2fs_write_checkpoint/enable
+    echo 1 > /d/tracing/events/block/block_rq_issue
+    echo 1 > /d/tracing/events/block/block_rq_complete
+    echo 1 > /d/tracing/events/block/enable
+    echo 1 > /d/tracing/events/ufs/enable
+    echo 1 > /d/tracing/events/scsi/enable
 
     echo 1 > /d/tracing/tracing_on
 }
@@ -1011,11 +991,6 @@ config_lito_dcc_misc()
     echo 0xB2C0900 > $DCC_PATH/config
     echo 0xB2C0904 > $DCC_PATH/config
 
-    echo 0x04082028 > $DCC_PATH/config
-    echo 0x18A004 > $DCC_PATH/config
-    echo 0x04080044 > $DCC_PATH/config
-    echo 0x04080304 > $DCC_PATH/config
-
     echo 0x4200010 > $DCC_PATH/config
     echo 0x4200014 > $DCC_PATH/config
     echo 0x4200018 > $DCC_PATH/config
@@ -1361,30 +1336,7 @@ config_lito_dcc_misc()
     echo 0x3502d44 > $DCC_PATH/config
     echo 0x3502d4c > $DCC_PATH/config
     echo 0x3502d50 > $DCC_PATH/config
- 
-    echo 0x339200C > $DCC_PATH/config
-    echo 0x338005C > $DCC_PATH/config
-    echo 0x3392014 > $DCC_PATH/config
-    echo 0x338005C > $DCC_PATH/config
-    echo 0x33A0000 > $DCC_PATH/config
-    echo 0x3389028 > $DCC_PATH/config
- 
-    echo 0x3388008 > $DCC_PATH/config
-    echo 0x3388004 > $DCC_PATH/config
-    echo 0x3382008 > $DCC_PATH/config
-    echo 0x3382004 > $DCC_PATH/config
-    echo 0x3381000 > $DCC_PATH/config
-    echo 0x3381004 > $DCC_PATH/config
     
-    echo 0x3396090 > $DCC_PATH/config
-    echo 0x339609C > $DCC_PATH/config
-    echo 0x3801000 > $DCC_PATH/config
-    echo 0x3802004 > $DCC_PATH/config
-    echo 0x3802008 > $DCC_PATH/config
-    echo 0x380200C > $DCC_PATH/config
-    echo 0x3802014 > $DCC_PATH/config
-    echo 0x3801004 > $DCC_PATH/config
-
     echo 0x30B0010 > $DCC_PATH/config
     echo 0x30B0014 > $DCC_PATH/config
     echo 0x30B0018 > $DCC_PATH/config
@@ -1493,30 +1445,30 @@ config_lito_dcc_misc()
     echo 0x83B0408 > $DCC_PATH/config
 
     #NPU
-    #echo 0x98B0010 > $DCC_PATH/config
-    #echo 0x98B0014 > $DCC_PATH/config
-    #echo 0x98B0018 > $DCC_PATH/config
-    #echo 0x98B0210 > $DCC_PATH/config
-    #echo 0x98B0230 > $DCC_PATH/config
-    #echo 0x98B0250 > $DCC_PATH/config
-    #echo 0x98B0270 > $DCC_PATH/config
-    #echo 0x98B0290 > $DCC_PATH/config
-    #echo 0x98B02B0 > $DCC_PATH/config
-    #echo 0x98B0208 > $DCC_PATH/config
-    #echo 0x98B0228 > $DCC_PATH/config
-    #echo 0x98B0248 > $DCC_PATH/config
-    #echo 0x98B0268 > $DCC_PATH/config
-    #echo 0x98B0288 > $DCC_PATH/config
-    #echo 0x98B02A8 > $DCC_PATH/config
-    #echo 0x98B020C > $DCC_PATH/config
-    #echo 0x98B022C > $DCC_PATH/config
-    #echo 0x98B024C > $DCC_PATH/config
-    #echo 0x98B026C > $DCC_PATH/config
-    #echo 0x98B028C > $DCC_PATH/config
-    #echo 0x98B02AC > $DCC_PATH/config
-    #echo 0x98B0400 > $DCC_PATH/config
-    #echo 0x98B0404 > $DCC_PATH/config
-    #echo 0x98B0408 > $DCC_PATH/config
+    echo 0x98B0010 > $DCC_PATH/config
+    echo 0x98B0014 > $DCC_PATH/config
+    echo 0x98B0018 > $DCC_PATH/config
+    echo 0x98B0210 > $DCC_PATH/config
+    echo 0x98B0230 > $DCC_PATH/config
+    echo 0x98B0250 > $DCC_PATH/config
+    echo 0x98B0270 > $DCC_PATH/config
+    echo 0x98B0290 > $DCC_PATH/config
+    echo 0x98B02B0 > $DCC_PATH/config
+    echo 0x98B0208 > $DCC_PATH/config
+    echo 0x98B0228 > $DCC_PATH/config
+    echo 0x98B0248 > $DCC_PATH/config
+    echo 0x98B0268 > $DCC_PATH/config
+    echo 0x98B0288 > $DCC_PATH/config
+    echo 0x98B02A8 > $DCC_PATH/config
+    echo 0x98B020C > $DCC_PATH/config
+    echo 0x98B022C > $DCC_PATH/config
+    echo 0x98B024C > $DCC_PATH/config
+    echo 0x98B026C > $DCC_PATH/config
+    echo 0x98B028C > $DCC_PATH/config
+    echo 0x98B02AC > $DCC_PATH/config
+    echo 0x98B0400 > $DCC_PATH/config
+    echo 0x98B0404 > $DCC_PATH/config
+    echo 0x98B0408 > $DCC_PATH/config
 
 
     echo   0x144164   1   > $DCC_PATH/config

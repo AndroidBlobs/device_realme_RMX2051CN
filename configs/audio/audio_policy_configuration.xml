@@ -171,7 +171,13 @@
                              channelMasks="AUDIO_CHANNEL_OUT_STEREO"/>
                 </mixPort>
 
+                <!--#ifndef VENDOR_EDIT
+                //YaJun.Li@PSW.MM.AudioServer.FrameWork. CR#2385789,2019/08/23,Modify for concurrent record.
                 <mixPort name="primary input" role="sink" maxOpenCount="2" maxActiveCount="2">
+                -->
+                <!--#else VENDOR_EDIT-->
+                <mixPort name="primary input" role="sink">
+                <!--#endif VENDOR_EDIT-->
                     <profile name="" format="AUDIO_FORMAT_PCM_16_BIT"
                              samplingRates="8000,11025,12000,16000,22050,24000,32000,44100,48000"
                              channelMasks="AUDIO_CHANNEL_IN_MONO,AUDIO_CHANNEL_IN_STEREO,AUDIO_CHANNEL_IN_FRONT_BACK"/>
@@ -406,14 +412,8 @@
                        sources="voice_tx,incall_music_uplink"/>
                 <route type="mix" sink="voice_rx"
                        sources="Telephony Rx"/>
-                <!-- #ifndef VENDOR_EDIT
-                //Zhao.Pan@PSW.MM.AudioDriver.Hal, 2019/12/28, Delete "USB Device In,USB Headset In"
                 <route type="mix" sink="primary input"
                        sources="Wired Headset Mic,BT SCO Headset Mic,FM Tuner,USB Device In,USB Headset In,Telephony Rx"/>
-                #else VENDOR_EDIT -->
-                <route type="mix" sink="primary input"
-                       sources="Wired Headset Mic,BT SCO Headset Mic,FM Tuner,Telephony Rx"/>
-                <!-- #endif VENDOR_EDIT -->
                 <route type="mix" sink="voip_tx"
                        sources="Built-In Mic,Built-In Back Mic,BT SCO Headset Mic,USB Device In,USB Headset In"/>
                 <route type="mix" sink="usb_surround_sound"
